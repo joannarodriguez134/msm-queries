@@ -29,4 +29,21 @@ class DirectorsController < ApplicationController
     render(template: "director_templates/youngest_result")
 
   end
+
+
+  def show_eldest
+
+    matching_records = Director.where.not({ :dob => nil }).all.order({ :dob => :asc })
+
+    the_director = matching_records.first
+
+    @director_name = the_director.name
+
+    @director_dob = the_director.dob.strftime('%B %e, %Y')
+
+    
+    render(template: "director_templates/eldest_result")
+
+  end
+  
 end
